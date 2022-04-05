@@ -26,7 +26,7 @@ class loginForm:
             path = os.path.join(sys.path[0], './data/user.dat')
             with open(path,'r') as file:
                 users = file.read()
-                res = users.find(f'{name},{pw}\n')
+                res = users.find(f'{name},{pw},')
                 if(res >= 0):
                     self.screen.destroy()
                     self.inforScreen = fillInforScreen()
