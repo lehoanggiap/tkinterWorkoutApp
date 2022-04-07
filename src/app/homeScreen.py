@@ -17,6 +17,7 @@ class homeScreen(Screen):
         self.btnExercise = Button(self.navBar, bg = Constant.main_color, borderwidth= 0, activebackground = Constant.main_color)
         self.exercises_block = Frame(self.screen, bg = Constant.list_color) 
 
+        self.totalTime = Label(self.exercises_block, text = "Total time\n00:00", font = f'{Constant.main_color} 16', fg = Constant.white_color, bg = Constant.list_color)
         self.btnNext = Button(self.exercises_block, bg = Constant.list_color, borderwidth= 0, activebackground = Constant.list_color)
         self.btnPrev = Button(self.exercises_block, bg = Constant.list_color, borderwidth= 0, activebackground = Constant.list_color)
 
@@ -31,10 +32,10 @@ class homeScreen(Screen):
                                     fg = Constant.main_color, text = "Stretching",
                                     font = f'{Constant.main_font} 16 bold')
         self.active_exercise_image = Label(self.active_exercise_block, bg = Constant.white_color)
-        self.active_exercise_intro = Label(self.active_exercise_block, bg = Constant.white_color, font = f'{Constant.main_font} 10',
+        self.active_exercise_intro = Label(self.active_exercise_block, bg = Constant.white_color, font = f'{Constant.main_font} 12',
         justify = LEFT, wraplength= 300)
-        self.active_time_countdown = Label(self.active_exercise_block, text = "00:00", font = f'{Constant.main_font} 20')
-        
+        self.active_time_countdown = Label(self.active_exercise_block, text = "00:00", font = f'{Constant.main_font} 18')
+        self.active_calories_burn = Label(self.active_exercise_block, text = "Calories burn: 0", font = f'{Constant.main_font} 18' )
 
         self.active_btn_frame = Frame(self.active_exercise_block, bg = Constant.white_color)
         self.btnNext_Ex = Button(self.active_btn_frame, bg = Constant.white_color, borderwidth= 0, activebackground = Constant.white_color)
@@ -47,10 +48,8 @@ class homeScreen(Screen):
         self.createActiveExercise()
 
     def redirect(self):
-        # self.screen.destroy()
         self.openScreen = statisticsScreen("../assets/img/dashboard-bgr.jpg")
         self.openScreen.onCreate()
-        # self.openScreen.run()
 
 
     def createNavBar(self):
@@ -71,6 +70,7 @@ class homeScreen(Screen):
 
     def createExercisesList(self):    
         self.exercises_block.place(relx = .05,relwidth = .45, relheight = 1)
+        self.totalTime.place(relx = .15, rely = .02)
 
         self.iconNext = self.createImage('../assets/img/next-icon.png', {'width': 40, 'height': 40})
         self.btnNext['image'] = self.iconNext
@@ -99,7 +99,7 @@ class homeScreen(Screen):
         self.active_exercise_intro.pack(pady = 10)
 
         self.active_time_countdown.pack(pady = 10, ipadx = 5, ipady = 5)
-
+        self.active_calories_burn.pack(pady = 10, ipadx = 5, ipady = 5)
         self.active_btn_frame.pack(pady = 50)
 
         self.btnPrev_Ex['image'] = self.iconPrev
